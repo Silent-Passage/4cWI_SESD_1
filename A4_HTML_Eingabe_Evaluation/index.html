@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Formular Test</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/parsley.js/2.9.2/parsley.min.js"></script>
+    <script src="script.js"></script>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <h1>Formular Test</h1>
+
+    <div class="info">
+      <p>Test von allen HTML Input-Typen mit Validierung</p>
+    </div>
+
+    <form id="test-form" data-parsley-validate>
+      <div class="field">
+        <label>Text *:</label>
+        <input type="text" id="text1" required />
+      </div>
+
+      <div class="field">
+        <label>Email *:</label>
+        <input
+          type="email"
+          id="email1"
+          required
+          data-parsley-trigger="change"
+        />
+      </div>
+
+      <div class="field">
+        <label>Radio *:</label>
+        <input type="radio" name="group1" value="opt1" required /> Option 1
+        <input type="radio" name="group1" value="opt2" /> Option 2
+      </div>
+
+      <div class="field">
+        <label>Checkbox (min. 2):</label>
+        <input
+          type="checkbox"
+          name="hobbies"
+          value="sport"
+          data-parsley-mincheck="2"
+        />
+        Sport <input type="checkbox" name="hobbies" value="music" /> Musik
+        <input type="checkbox" name="hobbies" value="books" /> Bücher
+      </div>
+
+      <div class="field">
+        <label>Select *:</label>
+        <select required>
+          <option value="">Wähle...</option>
+          <option value="1">Option 1</option>
+          <option value="2">Option 2</option>
+        </select>
+      </div>
+
+      <div class="field">
+        <label>Textarea (10-100 Zeichen):</label>
+        <textarea
+          data-parsley-minlength="10"
+          data-parsley-maxlength="100"
+        ></textarea>
+      </div>
+
+      <div class="field">
+        <label>Zahl (1-100):</label>
+        <input type="number" min="1" max="100" />
+      </div>
+
+      <div class="field">
+        <label>Datum:</label>
+        <input type="date" />
+      </div>
+
+      <div class="field">
+        <label>Farbe:</label>
+        <input type="color" />
+      </div>
+
+      <div class="field">
+        <label>Range:</label>
+        <input type="range" />
+      </div>
+
+      <div class="field">
+        <label>Datei:</label>
+        <input type="file" />
+      </div>
+
+      <div class="field">
+        <label>Passwort:</label>
+        <input type="password" />
+      </div>
+
+      <div class="field">
+        <label>Suche:</label>
+        <input type="search" />
+      </div>
+
+      <div class="field">
+        <label>Telefon:</label>
+        <input type="tel" />
+      </div>
+
+      <div class="field">
+        <label>URL:</label>
+        <input type="url" />
+      </div>
+
+      <div class="field">
+        <label>Zeit:</label>
+        <input type="time" />
+      </div>
+
+      <div class="field">
+        <label>Woche:</label>
+        <input type="week" />
+      </div>
+
+      <div class="field">
+        <label>Monat:</label>
+        <input type="month" />
+      </div>
+
+      <div class="field">
+        <label>Datum Zeit:</label>
+        <input type="datetime-local" />
+      </div>
+
+      <div class="buttons">
+        <input type="submit" value="Abschicken" />
+        <input type="reset" value="Zurücksetzen" />
+      </div>
+    </form>
+
+    <div class="info">
+      <h3>Fragen:</h3>
+      <p>
+        <strong>Welche Elemente brauchen JavaScript?</strong><br />
+        Eigentlich keine, aber für bessere UX kann man welches nehmen
+      </p>
+
+      <p>
+        <strong>Sichere Elemente:</strong><br />
+        Password ist sicher, Rest kann ganz einfach manipuliert werden
+      </p>
+
+      <p>
+        <strong>Libraries für Validierung:</strong><br />
+        Parsley.js, HTML5 Validation
+      </p>
+
+      <p>
+        <strong>Usability Tipps:</strong><br />
+        Labels verwenden, Fehlermeldungen zeigen, nicht zu lang machen
+      </p>
+    </div>
+  </body>
+</html>
