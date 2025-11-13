@@ -1,35 +1,51 @@
 $(document).ready(function () {
-  $("#test-form")
+  // Range Wert anzeigen
+  $("#input-range").on("input", function () {
+    $("#range-value").text(this.value);
+  });
+
+  // Parsley Validierung
+  $("#test_form")
     .parsley()
     .on("field:validated", function () {
       var ok = $(".parsley-error").length === 0;
-      console.log("Formular validiert - Fehler:", $(".parsley-error").length);
+      $(".bs-callout-info").toggleClass("hidden", !ok);
+      $(".bs-callout-warning").toggleClass("hidden", ok);
     })
     .on("form:submit", function () {
-      console.log("=== FORMULAR DATEN ===");
-      console.log("Text:", $("#text1").val());
-      console.log("Email:", $("#email1").val());
-
-      var radioValue = $('input[name="group1"]:checked').val();
-      console.log("Radio:", radioValue);
-
-      var checkboxes = [];
-      $('input[name="hobbies"]:checked').each(function () {
-        checkboxes.push($(this).val());
-      });
-      console.log("Checkboxes:", checkboxes);
-
-      console.log("Alle Input-Werte:");
-      $("input, select, textarea").each(function () {
-        if (
-          $(this).attr("type") !== "submit" &&
-          $(this).attr("type") !== "reset"
-        ) {
-          console.log($(this).attr("type") + ":", $(this).val());
-        }
-      });
-
-      console.log("Formular ist gültig und würde abgeschickt werden");
-      return false; // Formular nicht wirklich abschicken
+      alert("Formular ist gültig und würde abgeschickt werden!");
+      return false;
     });
+
+  // Custom Validator für Dateitypen
+  window.Parsley.addValidator("fileextension", {
+    validateString: function (value, requirement, parsleyInstance) {
+      if (!value) return false; // Required field
+      var allowed = requirement
+        .split(",")
+        .map((ext) => ext.trim().toLowerCase());
+      var file = parsleyInstance.$element[0].files[0];
+      if (!file) return false;
+      var ext = file.name.split(".").pop().toLowerCase();
+      return allowed.includes(ext);
+    },
+    requirementType: "string",
+    messages: {
+      de: "Nur PDF, JPG oder PNG Dateien sind erlaubt",
+    },
+  });
+
+  // Custom Validator für Dateigröße
+  window.Parsley.addValidator("maxFileSize", {
+    validateString: function (value, maxSize, parsleyInstance) {
+      if (!value) return false; // Required field
+      var files = parsleyInstance.$element[0].files;
+      if (files.length === 0) return false;
+      return files[0].size / 1024 <= maxSize;
+    },
+    requirementType: "integer",
+    messages: {
+      de: "Die Datei ist zu groß. Maximal 2MB erlaubt.",
+    },
+  });
 });
