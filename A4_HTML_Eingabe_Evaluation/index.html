@@ -27,7 +27,14 @@
 
         <div>
           <label for="input-tel" class="required">Telefon:</label>
-          <input type="tel" id="input-tel" name="input_tel" required />
+          <input
+            type="tel"
+            id="input-tel"
+            name="input_tel"
+            data-parsley-pattern="^[0-9]+$"
+            data-parsley-phone-message="Bitte geben Sie nur Zahlen ein"
+            required
+          />
         </div>
       </fieldset>
 
@@ -218,17 +225,6 @@
             id="input-button"
             value="Drück mich"
             onclick="alert('Button wurde gedrückt!')"
-          />
-        </div>
-
-        <div>
-          <label for="input-image">Grafischer Button:</label>
-          <input
-            type="image"
-            id="input-image"
-            src="https://via.placeholder.com/100/007bff/ffffff?text=OK"
-            alt="Absenden"
-            width="100"
           />
         </div>
 

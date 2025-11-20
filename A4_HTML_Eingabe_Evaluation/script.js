@@ -13,7 +13,7 @@ $(document).ready(function () {
       $(".bs-callout-warning").toggleClass("hidden", ok);
     })
     .on("form:submit", function () {
-      alert("Formular ist gültig und würde abgeschickt werden!");
+      alert("Formular ist gültig");
       return false;
     });
 
@@ -46,6 +46,16 @@ $(document).ready(function () {
     requirementType: "integer",
     messages: {
       de: "Die Datei ist zu groß. Maximal 2MB erlaubt.",
+    },
+  });
+  // Telephone
+
+  window.Parsley.addValidator("phone", {
+    validateString: function (value) {
+      return /^[0-9]+$/.test(value);
+    },
+    messages: {
+      de: "Bitte geben Sie nur Zahlen ein",
     },
   });
 });
